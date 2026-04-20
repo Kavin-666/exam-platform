@@ -7,7 +7,6 @@ const authRoutes = require('./routes/auth');
 const examRoutes = require('./routes/exams');
 const attemptRoutes = require('./routes/attempts');
 const analyticsRoutes = require('./routes/analytics');
-const seed = require('./seed');
 
 const app = express();
 
@@ -32,11 +31,8 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 async function startServer() {
   await mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("MongoDB connected"))
+    .then(() => console.log("MongoDB Atlas connected ✅"))
     .catch(err => console.log(err));
-  
-  // Seed initial data
-  await seed();
   
   app.listen(process.env.PORT || 5000, () =>
     console.log(`Server running on port ${process.env.PORT || 5000}`)
