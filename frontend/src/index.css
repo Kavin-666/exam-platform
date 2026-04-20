@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { @apply border-brand-border; }
+  body {
+    @apply bg-brand-dark text-slate-100 font-sans antialiased;
+  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-brand-card; }
+  ::-webkit-scrollbar-thumb { @apply bg-primary-600 rounded-full; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-500 text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95;
+  }
+  .btn-secondary {
+    @apply bg-brand-card hover:bg-slate-700 text-slate-200 font-medium px-5 py-2.5 rounded-xl border border-brand-border transition-all duration-200 active:scale-95;
+  }
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-500 text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200;
+  }
+  .card {
+    @apply bg-brand-card/70 backdrop-blur-xl border border-brand-border/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden transition-all duration-300;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 0 0, rgba(99,102,241,0.1), transparent 50%);
+    pointer-events: none;
+  }
+
+  .card:hover {
+    @apply border-indigo-500/30 transform -translate-y-1 shadow-indigo-900/40;
+  }
+
+  .input {
+    @apply w-full bg-brand-dark/50 border border-brand-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all shadow-inner;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] transform hover:-translate-y-0.5 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-brand-dark border border-brand-border hover:border-slate-500 text-slate-300 hover:text-white font-semibold py-3 px-6 rounded-xl transition-all hover:bg-slate-800/50 active:scale-95;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+  .skeleton {
+    @apply bg-slate-700 animate-pulse rounded-xl;
+  }
+}
