@@ -30,9 +30,12 @@ app.get('/', (req, res) => {
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 async function startServer() {
-  await mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("MongoDB Atlas connected ✅"))
-    .catch(err => console.log(err));
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log("MongoDB Atlas connected ✅");
+  } catch (err) {
+    console.log(err);
+  }
   
   app.listen(process.env.PORT || 5000, () =>
     console.log(`Server running on port ${process.env.PORT || 5000}`)
