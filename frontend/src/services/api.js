@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: 'http://localhost:5000/api' });
+const api = axios.create({
+  baseURL: 'https://exam-platform-3enn.onrender.com',
+});
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('ep_token');
