@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { MongoMemoryServer } = require('mongodb-memory-server');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -25,14 +24,16 @@ app.use('/api/exams', examRoutes);
 app.use('/api/attempts', attemptRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Backend is running');
+});
+
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 async function startServer() {
-  const mongod = await MongoMemoryServer.create();
-  const uri = mongod.getUri();
-  
-  await mongoose.connect(uri);
-  console.log('MongoDB Memory Server connected at', uri);
+  await mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log("MongoDB connected"))
+    .catch(err => console.log(err));
   
   // Seed initial data
   await seed();
